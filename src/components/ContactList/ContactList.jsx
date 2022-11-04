@@ -2,7 +2,7 @@ import React from 'react';
 import { Li, Button } from './ContactList.styled';
 import PropTypes from 'prop-types';
 
-const ContactList = ({ contacts, handleRemove }) => (
+export const ContactList = ({ contacts, handleRemove }) => (
   <ul>
     {contacts.map(({ id, name, number }) => (
       <Li key={id}>
@@ -28,5 +28,3 @@ ContactList.propTypes = {
   ),
   handleRemove: PropTypes.func.isRequired,
 };
-
-export default ContactList;
