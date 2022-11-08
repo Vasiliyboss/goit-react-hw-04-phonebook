@@ -8,8 +8,8 @@ const Container = styled.div`
   margin-left: 40px;
 `;
 export function App() {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(localStorage.getItem('contacts'))
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) ?? []
   );
   const [filter, setFilter] = useState('');
 
@@ -19,9 +19,11 @@ export function App() {
 
   const addContacts = data => {
     const { name, number } = data;
-    const elArray = contacts.map(contact => contact.name);
+    const elArray = contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(name.toLowerCase());
+    });
 
-    if (elArray.includes(name)) {
+    if (elArray.length > 0) {
       alert(`${name} is already in contacts`);
     } else {
       const contacts = {
